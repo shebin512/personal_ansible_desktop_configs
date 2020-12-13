@@ -1,0 +1,27 @@
+---
+- hosts: all
+  connection: local
+  become: true
+
+  tasks:
+  - name: Install Packages
+    package: 
+      name:
+      - htop
+      - tmux
+  - name: Copy WallPapers
+    copy:
+      src: files/Wallpapers/
+      dest: /usr/share/backgrounds/
+      owner: root
+      group: root
+  - name: Set default walpaper
+    become: emb-shebshe
+    dconf:
+      key: /org/mate/desktop/background/picture-filename
+      value: "'file:///usr/share/background/Anonymous-wallpapers-HD-free-download.png'"
+  - name: Set wallpaper position
+    become: emb-shebshe
+    dconf:
+      key: /org/mate/desktop/background/picture-options
+      value: 'zoom'
