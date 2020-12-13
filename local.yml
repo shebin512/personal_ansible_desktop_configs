@@ -9,20 +9,26 @@
       name:
       - htop
       - tmux
+      - python-psutil
   - name: Copy WallPapers
     copy:
       src: files/Wallpapers/
       dest: /usr/share/backgrounds/
       owner: root
       group: root
+
+  - name: Debug
+    debug: var=ansible_env
+  
   - name: Set default walpaper
-    become: emb-shebshe
+    become_user: emb-shebshe
     dconf:
-      key: /org/mate/desktop/background/picture-filename
-      value: "'file:///usr/share/background/Anonymous-wallpapers-HD-free-download.png'"
-    when: ansible_env.XDG_CURRENT_DESKTOP == 'MATE'
+      key: "/org/mate/desktop/background/picture-filename"
+      value: "'/usr/share/backgrounds/Anonymous-veni-vidi-vici.png'"
+#    when: ansible_env['XDG_CURRENT_DESKTOP'] == 'MATE'
+  
   - name: Set wallpaper position
-    become: emb-shebshe
+    become_user: emb-shebshe
     dconf:
-      key: /org/mate/desktop/background/picture-options
-      value: 'zoom'
+      key: "/org/mate/desktop/background/picture-options"
+      value: "'zoom'"
