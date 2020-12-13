@@ -20,7 +20,7 @@
     dconf:
       key: /org/mate/desktop/background/picture-filename
       value: "'file:///usr/share/background/Anonymous-wallpapers-HD-free-download.png'"
-    when: ansible_env.XDG_SESSION_DESKTOP == 'MATE'
+    when: ansible_env.XDG_CURRENT_DESKTOP == 'MATE'
   - name: Set wallpaper position
     become: emb-shebshe
     dconf:
